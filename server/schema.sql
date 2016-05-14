@@ -3,10 +3,14 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
+  P_Id int NOT NULL,
+  roomname varchar(255) NOT NULL,
+  username varchar(255) NOT NULL,
+  messages varchar(255) NOT NULL
   /* Describe your table here.*/
 );
 
-/* Create other tables and define schemas for them here! */
+/* Create oher tables and define schemas for them here! */
 
 
 
