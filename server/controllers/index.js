@@ -4,26 +4,42 @@ module.exports = {
 
   messages: {
     get: function (req, res) {
-      //req.body contains our information, pass this into our function below. 
-      //models.messages.get();
+      models.messages.get(function (err,result) {
+        if (err) {
+          console.log(err);
+        } else {
+        res.sendStatus(200);
+        res.json(result);
+        }
+      });
     }, // a function which handles a get request for all messages
     post: function (req, res) {
-      console.log('messages is being called');      
-      console.log('req body: ', req.body);
+      models.messages.post(req, res, function (err,result) {
+        res.sendStatus(201).end();
+      });
     } // a function which handles posting a message to the database
     //req.body contains the post information
   },
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {
-      console.log('post 3');
-      db.con.query('insert into messages (message) values (\"Hello World\")', function (err, rows, fields) {
-        if (!err) {
-          console.log('Message was inserted');
+    get: function (req, res) {
+      models.users.get(req, res, function (err,result) {
+        if (err) {
+          console.log(err);
         } else {
-          console.log('Woops message was not inserted');
+          res.sendStatus(201);
+          res.json(result); 
+        }
+
+      });
+    },
+    post: function (req, res) {
+      models.users.post(req, res, function (err,result) {
+        if (err) {
+          console.log(err);
+        } else {
+          res.sendStatus(201).end();
         }
       });
     
